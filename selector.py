@@ -191,7 +191,7 @@ def main():
                 touched_py = True
             sel |= handle(f, path)
             if path.startswith("sqlglot/") and path.endswith(".py"):
-                sel |= opt
+                sel |= (opt & set(files[path]["file"]) if path in files else opt)
         if touched_py:
             sel |= always
         return sel
