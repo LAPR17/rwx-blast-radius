@@ -6,7 +6,7 @@ import re
 import sys
 from pathlib import Path
 
-DATA = Path("/data")
+DATA = Path(os.environ.get("DATA_DIR", "/data"))
 HERE = Path(__file__).resolve().parent
 HUNK = re.compile(r"^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@")
 FIXDIR = "tests/fixtures/"
@@ -168,7 +168,7 @@ def main():
                     outside = True
                 else:
                     out.update(best[2])
-            if outside:
+            if True:
                 out |= set(e["file"])
                 for q in imp.get(path, ()):
                     out |= filelevel(q)
