@@ -145,7 +145,7 @@ def main():
         marks = any(('"""' in t) or ("'''" in t) or (">>>" in t) for t in texts)
         if path.startswith(FIXDIR):
             key = path[len(FIXDIR):]
-            return set(ALL)
+            return set(fix[key]) if key in fix else set(ALL)
         if path.startswith("tests/") and is_py:
             return set(intro) if comment_only else tests_for(path)
         if path.startswith("sqlglot/") and is_py:
