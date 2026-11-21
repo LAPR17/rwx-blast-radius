@@ -10,6 +10,12 @@ DATA = Path("/data")
 HERE = Path(__file__).resolve().parent
 HUNK = re.compile(r"^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@")
 FIXDIR = "tests/fixtures/"
+DIALECT_DIRS = ("sqlglot/dialects/", "sqlglot/parsers/", "sqlglot/generators/", "sqlglot/typing/")
+SHARED_FILES = {"__init__.py", "base.py", "dialect.py", "duckdb.py"}
+
+
+def dialect_only(path):
+    return path.startswith(DIALECT_DIRS) and os.path.basename(path) not in SHARED_FILES
 
 
 def clean(p):
@@ -114,6 +120,8 @@ def main():
     files, imp, tf, fix = M["files"], M["imp"], M["tf"], M["fix"]
     fixdefault = set(M["fixdefault"])
     opt = set(tf.get("tests/test_optimizer.py", ())) | set(tf.get("tests/test_executor.py", ()))
+    slow = {i for i, t in enumerate(mids) if t.endswith("::test_execute_tpcds")}
+    opt_fast = opt - slow
 
     def filelevel(q):
         if q in files:
@@ -191,7 +199,7 @@ def main():
                 touched_py = True
             sel |= handle(f, path)
             if path.startswith("sqlglot/") and path.endswith(".py"):
-                sel |= opt
+                sel |= opt_fast if dialect_only(path) else opt
         if touched_py:
             sel |= always
         return sel
@@ -213,3 +221,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    
