@@ -198,7 +198,10 @@ def main():
             if path.endswith(".py"):
                 touched_py = True
             sel |= handle(f, path)
-            if path.startswith("sqlglot/") and path.endswith(".py"):
+            ct = f["texts"]
+            only_comments = bool(f["lines"] and ct and
+                                 all((not t.strip()) or t.strip().startswith("#") for t in ct))
+            if path.startswith("sqlglot/") and path.endswith(".py") and not only_comments:
                 sel |= opt_fast if dialect_only(path) else opt
         if touched_py:
             sel |= always
@@ -221,5 +224,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
     
