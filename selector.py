@@ -168,7 +168,7 @@ def main():
                     outside = True
                 else:
                     out.update(best[2])
-            if True:
+            if outside:
                 out |= set(e["file"])
                 for q in imp.get(path, ()):
                     out |= filelevel(q)
