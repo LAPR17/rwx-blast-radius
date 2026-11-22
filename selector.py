@@ -190,7 +190,9 @@ def main():
             if path.endswith(".py"):
                 touched_py = True
             sel |= handle(f, path)
-            if path.startswith("sqlglot/") and path.endswith(".py"):
+            _t = f["texts"]
+            _c = bool(f["lines"] and _t and all((not x.strip()) or x.strip().startswith("#") for x in _t))
+            if path.startswith("sqlglot/") and path.endswith(".py") and not _c:
                 sel |= (opt & set(files[path]["file"]) if path in files else opt)
         if touched_py:
             sel |= always
