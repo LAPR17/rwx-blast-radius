@@ -171,7 +171,9 @@ def main():
             if outside:
                 out |= set(e["file"])
                 for q in imp.get(path, ()):
-                    out |= filelevel(q)
+                    fq = filelevel(q)
+                    if len(fq) < 1000:
+                        out |= fq
             if marks:
                 out |= intro
             return out
