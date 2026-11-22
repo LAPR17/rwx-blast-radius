@@ -1,0 +1,27 @@
+seconds: test_optimizer.py 19.8 | test_executor.py 31.6
+slowest: [('test_max_nodes', 28.817), ('test_execute_tpcds', 21.454), ('test_generator_memory', 6.686), ('test_execute_tpch', 3.863), ('test_optimized_tpch', 3.537), ('test_scope', 2.533), ('test_tpcds', 2.232), ('test_annotate_funcs', 1.963)]
+== 2jrq code missed [('test_execute_tpcds', 21.454), ('test_eliminate_joins', 0.105), ('test_optimize', 0.395), ('test_tpcds', 2.232), ('test_tpch', 0.355)]
+  file sqlglot/optimizer/eliminate_joins.py changed lines [71, 72] in map: True
+  missed tests covered anywhere in file: [True, True, True, True, True]
+   line 71 enclosing spans (start, end, missed-in-span): [(62, 77, [False, False, False, False, False])]
+   line 72 enclosing spans (start, end, missed-in-span): [(62, 77, [False, False, False, False, False])]
+== 3utz code missed [('test_eliminate_ctes', 0.006), ('test_eliminate_joins', 0.105), ('test_eliminate_subqueries', 0.021), ('test_normalize_identifiers', 0.068), ('test_optimize', 0.395), ('test_optimize_joins', 0.038), ('test_pushdown_cte_alias_columns', 0.007), ('test_pushdown_predicates', 0.083), ('test_qualify_tables', 0.09), ('test_quote_identifiers', 0.007), ('test_tpcds', 2.232), ('test_tpch', 0.355), ('test_unnest_subqueries', 0.329)]
+  file sqlglot/serde.py changed lines [53, 54] in map: True
+  missed tests covered anywhere in file: [True, True, True, True, True, True, True, True, True, True, True, True, True]
+   line 53 enclosing spans (start, end, missed-in-span): [(24, 74, [False, False, False, False, False, False, False, False, False, False, False, False, False])]
+   line 54 enclosing spans (start, end, missed-in-span): [(24, 74, [False, False, False, False, False, False, False, False, False, False, False, False, False])]
+== ary6 code missed [('test_optimize', 0.395), ('test_quote_identifiers', 0.007)]
+  file sqlglot/parsers/bigquery.py changed lines [500, 501] in map: True
+  missed tests covered anywhere in file: [True, True]
+   line 500 enclosing spans (start, end, missed-in-span): [(464, 543, [False, False])]
+   line 501 enclosing spans (start, end, missed-in-span): [(464, 543, [False, False])]
+== rszg multi missed [('test_optimize', 0.395)]
+  file sqlglot/optimizer/scope.py changed lines [9, 10] in map: True
+  missed tests covered anywhere in file: [True]
+   line 9 enclosing spans (start, end, missed-in-span): []
+   line 10 enclosing spans (start, end, missed-in-span): []
+  file sqlglot/typing/snowflake.py changed lines [101, 102] in map: True
+  missed tests covered anywhere in file: [True]
+   line 101 enclosing spans (start, end, missed-in-span): [(92, 108, [False])]
+   line 102 enclosing spans (start, end, missed-in-span): [(92, 108, [False])]
+  file tests/fixtures/optimizer/qualify_columns_ddl.sql changed lines [36, 37] in map: False
