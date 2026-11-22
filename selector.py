@@ -171,9 +171,7 @@ def main():
             if outside:
                 out |= set(e["file"])
                 for q in imp.get(path, ()):
-                    fq = filelevel(q)
-                    if len(fq) < 1000:
-                        out |= fq
+                    out |= filelevel(q)
             if marks:
                 out |= intro
             return out
@@ -198,18 +196,6 @@ def main():
                 sel |= (opt & set(files[path]["file"]) if path in files else opt)
         if touched_py:
             sel |= always
-        _paths = [(f["old"] or f["new"] or "") for f in parse_patch(text)]
-        if _paths and all(q.startswith("sqlglot/") and q.endswith(".py") for q in _paths):
-            _core = ("sqlglot/expressions/", "sqlglot/dialects/dialect.py", "sqlglot/helper.py", "sqlglot/errors.py")
-            _gates = {
-                1490: _core + ("sqlglot/parser.py", "sqlglot/parsers/", "sqlglot/tokens.py"),
-                1224: _core + ("sqlglot/generator.py", "sqlglot/generators/"),
-            }
-            for _num, _pre in _gates.items():
-                if not any(q.startswith(_pre) for q in _paths):
-                    for _i, _n in enumerate(idx_num):
-                        if _n == _num:
-                            sel.discard(_i)
         return sel
 
     total = 0
